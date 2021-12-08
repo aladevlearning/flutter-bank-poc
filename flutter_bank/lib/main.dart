@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bank/payments/domestic.dart';
+import 'package:flutter_bank/payments/international.dart';
 import 'package:flutter_bank/products/products.dart';
 
 void main() => runApp(const MyApp());
@@ -47,6 +49,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String dropdownValue = 'Domestic';
 
   void _incrementCounter() {
     setState(() {
@@ -93,16 +96,65 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              child: const Text('Products'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ProductsPage()),
-                );
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  color: Colors.orange,
+                  child: ElevatedButton(
+                    child: const Text('Products'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProductsPage()),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  color: Colors.white,
+                  child: DropdownButton<String>(
+                    value: dropdownValue,
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+
+                      if (newValue == 'Domestic') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DomesticPage()),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const InternationalPage()),
+                        );
+                      }
+                    },
+                    items: <String>['Domestic', 'International']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                )
+              ],
             ),
+
             /* const Text(
               'You have pushed the button this many times:',
             ),
