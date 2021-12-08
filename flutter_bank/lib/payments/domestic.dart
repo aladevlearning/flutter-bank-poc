@@ -28,27 +28,48 @@ class _ProductsPageState extends State<DomesticPage> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          TextFormField(
-                            decoration:
-                                InputDecoration(labelText: 'First name'),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please enter your first name';
-                              }
-                            },
-                            onSaved: (val) =>
-                                setState(() => _user.firstName = val),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: TextFormField(
+                                        decoration: const InputDecoration(
+                                            labelText: 'Account number'),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please enter your account number';
+                                          }
+                                        },
+                                        onSaved: (val) => {
+                                              if (val != null)
+                                                {
+                                                  setState(() => _user
+                                                      .accountNumber = val),
+                                                }
+                                            })),
+                              ),
+                              Expanded(
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: TextFormField(
+                                          decoration: const InputDecoration(
+                                              labelText: 'Beneficiary Name'),
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Please enter your beneficiary name .';
+                                            }
+                                          },
+                                          onSaved: (val) => {
+                                                if (val != null)
+                                                  {
+                                                    setState(() => _user
+                                                        .beneficiaryName = val)
+                                                  }
+                                              })))
+                            ],
                           ),
-                          TextFormField(
-                              decoration:
-                                  InputDecoration(labelText: 'Last name'),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter your last name.';
-                                }
-                              },
-                              onSaved: (val) =>
-                                  setState(() => _user.lastName = val)),
                           Container(
                             padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
                             child: Text('Subscribe'),
@@ -89,7 +110,7 @@ class _ProductsPageState extends State<DomesticPage> {
                               child: RaisedButton(
                                   onPressed: () {
                                     final form = _formKey.currentState;
-                                    if (form.validate()) {
+                                    if (form!.validate()) {
                                       form.save();
                                       _user.save();
                                       _showDialog(context);
