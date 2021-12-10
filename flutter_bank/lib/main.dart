@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bank/payments/domestic.dart';
 import 'package:flutter_bank/payments/international.dart';
-import 'package:flutter_bank/products/products.dart';
+import 'package:flutter_bank/products/productspage.dart';
 
 void main() => runApp(const MyApp());
 
