@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bank/common/dropdown.dart';
 
 import 'models/user.dart';
 
@@ -29,12 +30,7 @@ class _ProductsPageState extends State<DomesticPage> {
   }
 
   formMobileContainer() {
-    return const Text(
-      'Hello, Mobile implementation',
-      textAlign: TextAlign.center,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(fontWeight: FontWeight.bold),
-    );
+    return const DropdownItem(label: 'A banme', values: ['1mobile', '2mobile']);
   }
 
   formWebContainer() {
@@ -90,7 +86,8 @@ class _ProductsPageState extends State<DomesticPage> {
                       ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
-                        child: Text('Subscribe'),
+                        child: const DropdownItem(
+                            label: 'A banme', values: ['1web', '2web', '3web']),
                       ),
                       SwitchListTile(
                           title: const Text('Monthly Newsletter'),
